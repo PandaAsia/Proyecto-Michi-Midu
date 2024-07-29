@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Square from "./components/Square";
 import confetti from "canvas-confetti";
 import {
   board,
@@ -9,6 +8,8 @@ import {
 } from "./constants/constants.js";
 import { checkWinner, ceckEndGame } from "./logic/logic.js";
 import WinnerModal from "./components/winnerModal.jsx";
+import PlayerTurn from "./components/PlayersTurn.jsx";
+import GameMesh from "./components/GameMesh.jsx";
 
 function App() {
   const [boards, setBoards] = useState(BoardInitial);
@@ -54,20 +55,8 @@ function App() {
       <main className="board">
         <h1>Juego del Michi</h1>
         <button onClick={Resetgame}>Resert Game</button>
-        <section className="game">
-          {boards.map((el, index) => {
-            return (
-              <Square key={index} index={index} updateBoard={updateBoard}>
-                {el}
-              </Square>
-            );
-          })}
-        </section>
-        <section className="turn">
-          <Square isSelected={turn === Truns.x}>{Truns.x}</Square>
-          <Square isSelected={turn === Truns.o}>{Truns.o}</Square>
-        </section>
-
+        <GameMesh boards={boards} updateBoard={updateBoard} />
+        <PlayerTurn Truns={Truns} turn={turn} />
         <WinnerModal winner={winner} Resetgame={Resetgame} />
       </main>
     </>
