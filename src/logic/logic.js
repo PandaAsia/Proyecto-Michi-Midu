@@ -3,7 +3,7 @@ export const checkWinner = (boardToCheck) => {
   for (const combo of WINNER_COMBOS) {
     const [a, b, c] = combo;
     if (
-      boardToCheck[a] &&
+      boardToCheck[a] && //
       boardToCheck[a] === boardToCheck[b] &&
       boardToCheck[a] === boardToCheck[c]
     ) {
@@ -12,6 +12,18 @@ export const checkWinner = (boardToCheck) => {
   }
   //si no hay ganador
   return null;
+};
+
+export const saveLocalStore = (newBoard, newTurn) => {
+  //guardar Partida
+  window.localStorage.setItem("board", JSON.stringify(newBoard));
+  window.localStorage.setItem("turn", newTurn);
+};
+
+export const deleteLocalStore = () => {
+  //se debe eliminar para cuando vuelva cargar los localstores debe estar vacio
+  window.localStorage.removeItem("board");
+  window.localStorage.removeItem("turn");
 };
 
 export const ceckEndGame = (newBoardh) => {

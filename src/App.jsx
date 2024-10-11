@@ -5,6 +5,8 @@ import {
   Truns,
   BoardInitial,
   TrunInitial,
+  saveLocalStore,
+  deleteLocalStore,
 } from "./constants/constants.js";
 import { checkWinner, ceckEndGame } from "./logic/logic.js";
 import WinnerModal from "./components/winnerModal.jsx";
@@ -28,8 +30,7 @@ function App() {
     setTurn(newTurn);
 
     //guardar Partida
-    window.localStorage.setItem("board", JSON.stringify(newBoard));
-    window.localStorage.setItem("turn", newTurn);
+    saveLocalStore(newBoard, newTurn);
 
     //revisar si hay ganador
     const newWinner = checkWinner(newBoard);
@@ -46,9 +47,9 @@ function App() {
     setBoards(board);
     setTurn(Truns.x);
     setWinner(null);
-    //se debe eliminar para cuando vuelva cargar los localstores debe estar vacio
-    window.localStorage.removeItem("board");
-    window.localStorage.removeItem("turn");
+
+    //elimna el localstore
+    deleteLocalStore();
   };
   return (
     <>
